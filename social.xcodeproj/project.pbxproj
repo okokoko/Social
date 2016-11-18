@@ -19,6 +19,7 @@
 		AC52706A1DDDB0DB007E079C /* RoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5270691DDDB0DB007E079C /* RoundButton.swift */; };
 		AC52706C1DDDB39E007E079C /* FancyTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC52706B1DDDB39E007E079C /* FancyTextField.swift */; };
 		AC52706E1DDDB61D007E079C /* FancyBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC52706D1DDDB61D007E079C /* FancyBtn.swift */; };
+		AC5270701DDF483E007E079C /* FeedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC52706F1DDF483E007E079C /* FeedVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,8 @@
 		AC5270691DDDB0DB007E079C /* RoundButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundButton.swift; sourceTree = "<group>"; };
 		AC52706B1DDDB39E007E079C /* FancyTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FancyTextField.swift; sourceTree = "<group>"; };
 		AC52706D1DDDB61D007E079C /* FancyBtn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FancyBtn.swift; sourceTree = "<group>"; };
+		AC52706F1DDF483E007E079C /* FeedVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedVC.swift; sourceTree = "<group>"; };
+		AC5270711DDF8FC2007E079C /* social.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = social.entitlements; sourceTree = "<group>"; };
 		DC9A8703E8CCC747D755E1E2 /* Pods_social.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_social.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA09A5B9EE245CE7C17A32C3 /* Pods-social.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-social.release.xcconfig"; path = "Pods/Target Support Files/Pods-social/Pods-social.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -90,6 +93,7 @@
 		AC52704A1DDCE175007E079C /* social */ = {
 			isa = PBXGroup;
 			children = (
+				AC5270711DDF8FC2007E079C /* social.entitlements */,
 				AC5270641DDDAD6D007E079C /* Util */,
 				AC5270611DDCE4FD007E079C /* Model */,
 				AC5270601DDCE4F0007E079C /* View */,
@@ -108,6 +112,7 @@
 			isa = PBXGroup;
 			children = (
 				AC52704D1DDCE175007E079C /* SignInVC.swift */,
+				AC52706F1DDF483E007E079C /* FeedVC.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -175,6 +180,11 @@
 						CreatedOnToolsVersion = 8.1;
 						DevelopmentTeam = RA4UC54DV9;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -267,6 +277,7 @@
 				AC52706A1DDDB0DB007E079C /* RoundButton.swift in Sources */,
 				AC52704C1DDCE175007E079C /* AppDelegate.swift in Sources */,
 				AC52706C1DDDB39E007E079C /* FancyTextField.swift in Sources */,
+				AC5270701DDF483E007E079C /* FeedVC.swift in Sources */,
 				AC5270661DDDAD8B007E079C /* Constanc.swift in Sources */,
 				AC5270631DDDABDB007E079C /* FancyView.swift in Sources */,
 				AC52706E1DDDB61D007E079C /* FancyBtn.swift in Sources */,
@@ -393,6 +404,7 @@
 			baseConfigurationReference = 6F4E9F3E2F6F3C8A9E67F969 /* Pods-social.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = social/social.entitlements;
 				DEVELOPMENT_TEAM = RA4UC54DV9;
 				INFOPLIST_FILE = social/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -407,6 +419,7 @@
 			baseConfigurationReference = EA09A5B9EE245CE7C17A32C3 /* Pods-social.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = social/social.entitlements;
 				DEVELOPMENT_TEAM = RA4UC54DV9;
 				INFOPLIST_FILE = social/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

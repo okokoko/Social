@@ -10,6 +10,8 @@ import UIKit
 import FBSDKCoreKit
 import FBSDKLoginKit
 import Firebase
+import SwiftKeychainWrapper
+
 
 class SignInVC: UIViewController, UITextFieldDelegate {
 
@@ -22,16 +24,18 @@ class SignInVC: UIViewController, UITextFieldDelegate {
         // nasledujúce tri riadky sú pre opustenie klavesnice po texte
         emailField.delegate = self
         pwdField.delegate = self
-        self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: Selector("dismissKeyboard")))
-        
+        self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(SignInVC.dismissKeyboard)))
+    }
+    
+    
+    override func viewDidAppear(_ animated: Bool) {
+        if let keych = KeychainWrapper.standard.string(forKey: KEY_UID) {
+            self.performSegue(withIdentifier: "goToFeed", sender: nil)
+            print("MARIO: Našiel sa keychain \(keych)")
+        }
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
-
+    
     @IBAction func facebookBtnTapped(_ sender: Any) {
         
         let facebookLogin = FBSDKLoginManager()
@@ -55,7 +59,9 @@ class SignInVC: UIViewController, UITextFieldDelegate {
                 print("MARIO: Nebolo sa možné pripojiť k firebase - \(error)")
             } else {
                 print("MARIO: Autentifikásia u firebase je úspešná")
-
+                if let user = user {
+                    self.completeSignIn(id: user.uid)
+                }
             }
         })
     }
@@ -65,10 +71,16 @@ class SignInVC: UIViewController, UITextFieldDelegate {
             FIRAuth.auth()?.signIn(withEmail: email, password: pasw, completion: { (user, error) in
                 if error == nil {
                     print("MARIO: Autentifikásia u firebase úspešná")
+                    if let user = user {
+                        self.completeSignIn(id: user.uid)
+                    }
                 } else {
                     FIRAuth.auth()?.createUser(withEmail: email, password: pasw, completion: { (user, error) in
                         if error == nil {
                             print("MARIO: Vytvorené nové konto pre usera \(email) u Firebase")
+                            if let user = user {
+                                self.completeSignIn(id: user.uid)
+                            }
                         } else {
                             print("MARIO: Nebolo možné vytvoriť nové konto u firebase - \(error)")
                         }
@@ -76,6 +88,13 @@ class SignInVC: UIViewController, UITextFieldDelegate {
                 }
             })
         }
+    }
+    
+    func completeSignIn(id: String){
+        print("idem ulozit keych \(id)")
+        KeychainWrapper.standard.set(id, forKey: KEY_UID)
+        print("MARIO: data boli uložené do keychain")
+        performSegue(withIdentifier: "goToFeed", sender: nil)
     }
     
     // Nasledujúce dve funkcie sú pre opustenie klávesnice, nezabudnúť delegate
