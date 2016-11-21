@@ -60,7 +60,8 @@ class SignInVC: UIViewController, UITextFieldDelegate {
             } else {
                 print("MARIO: Autentifikásia u firebase je úspešná")
                 if let user = user {
-                    self.completeSignIn(id: user.uid)
+                    let userData = ["provider": credential.providerID]
+                    self.completeSignIn(id: user.uid, userData: userData)
                 }
             }
         })
@@ -72,14 +73,16 @@ class SignInVC: UIViewController, UITextFieldDelegate {
                 if error == nil {
                     print("MARIO: Autentifikásia u firebase úspešná")
                     if let user = user {
-                        self.completeSignIn(id: user.uid)
+                        let userData = ["provider": user.providerID]
+                        self.completeSignIn(id: user.uid, userData: userData)
                     }
                 } else {
                     FIRAuth.auth()?.createUser(withEmail: email, password: pasw, completion: { (user, error) in
                         if error == nil {
                             print("MARIO: Vytvorené nové konto pre usera \(email) u Firebase")
                             if let user = user {
-                                self.completeSignIn(id: user.uid)
+                                let userData = ["provider": user.providerID]
+                                self.completeSignIn(id: user.uid, userData: userData)
                             }
                         } else {
                             print("MARIO: Nebolo možné vytvoriť nové konto u firebase - \(error)")
@@ -90,8 +93,8 @@ class SignInVC: UIViewController, UITextFieldDelegate {
         }
     }
     
-    func completeSignIn(id: String){
-        print("idem ulozit keych \(id)")
+    func completeSignIn(id: String, userData:Dictionary<String, String>){
+        DataService.ds.createFirebaseDBUser(uid: id, userData: userData)
         KeychainWrapper.standard.set(id, forKey: KEY_UID)
         print("MARIO: data boli uložené do keychain")
         performSegue(withIdentifier: "goToFeed", sender: nil)

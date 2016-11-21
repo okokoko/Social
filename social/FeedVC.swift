@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Firebase
+import SwiftKeychainWrapper
 
 class FeedVC: UIViewController {
 
@@ -16,5 +18,12 @@ class FeedVC: UIViewController {
         // Do any additional setup after loading the view.
     }
 
-     
+    @IBAction func signOutTapped(_ sender: Any) {
+        
+        let KeychainResult = KeychainWrapper.standard.remove(key: KEY_UID)
+        print("MARIO: key \(KeychainResult) bol zmazaný")
+        try! FIRAuth.auth()?.signOut()        
+        dismiss(animated: true, completion: nil)
+    }
+    
 }

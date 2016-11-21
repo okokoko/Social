@@ -165,6 +165,7 @@
                                     </label>
                                 </subviews>
                                 <color key="backgroundColor" red="0.0" green="0.73725490199999999" blue="0.83137254900000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstItem="lfm-AA-eyi" firstAttribute="centerY" secondItem="MjG-cq-xj9" secondAttribute="centerY" id="5fb-YT-AbN"/>
                                     <constraint firstItem="MjG-cq-xj9" firstAttribute="leading" secondItem="dCE-d4-qGZ" secondAttribute="leading" constant="16" id="H7I-xh-QoW"/>
@@ -172,6 +173,9 @@
                                     <constraint firstItem="MjG-cq-xj9" firstAttribute="top" secondItem="dCE-d4-qGZ" secondAttribute="top" constant="20" id="Tm6-ch-4dl"/>
                                     <constraint firstItem="lfm-AA-eyi" firstAttribute="centerX" secondItem="dCE-d4-qGZ" secondAttribute="centerX" id="lv6-2x-Mau"/>
                                 </constraints>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="zEF-fd-dXv" appends="YES" id="izS-hz-Ccy"/>
+                                </connections>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2D1-dd-qpA" customClass="FancyView" customModule="social" customModuleProvider="target">
                                 <rect key="frame" x="16" y="81" width="343" height="65"/>
@@ -325,6 +329,11 @@
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DKU-mV-aBd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="zEF-fd-dXv">
+                    <connections>
+                        <action selector="signOutTapped:" destination="sh1-vP-YBV" id="uBQ-rA-jwb"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="836" y="36.431784107946029"/>
         </scene>
