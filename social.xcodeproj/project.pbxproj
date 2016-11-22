@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		8093AE88E622E139CA0B6ABA /* Pods_social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC9A8703E8CCC747D755E1E2 /* Pods_social.framework */; };
+		AC27AD901DE47EDD004D3CFC /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC27AD8F1DE47EDD004D3CFC /* Post.swift */; };
 		AC52704C1DDCE175007E079C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC52704B1DDCE175007E079C /* AppDelegate.swift */; };
 		AC52704E1DDCE175007E079C /* SignInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC52704D1DDCE175007E079C /* SignInVC.swift */; };
 		AC5270511DDCE175007E079C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AC52704F1DDCE175007E079C /* Main.storyboard */; };
@@ -27,6 +28,7 @@
 
 /* Begin PBXFileReference section */
 		6F4E9F3E2F6F3C8A9E67F969 /* Pods-social.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-social.debug.xcconfig"; path = "Pods/Target Support Files/Pods-social/Pods-social.debug.xcconfig"; sourceTree = "<group>"; };
+		AC27AD8F1DE47EDD004D3CFC /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		AC5270481DDCE175007E079C /* social.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = social.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC52704B1DDCE175007E079C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AC52704D1DDCE175007E079C /* SignInVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInVC.swift; sourceTree = "<group>"; };
@@ -140,6 +142,7 @@
 		AC5270611DDCE4FD007E079C /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				AC27AD8F1DE47EDD004D3CFC /* Post.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -293,6 +296,7 @@
 				AC5270911DE0A1A0007E079C /* CircleView.swift in Sources */,
 				AC52704E1DDCE175007E079C /* SignInVC.swift in Sources */,
 				AC52706A1DDDB0DB007E079C /* RoundButton.swift in Sources */,
+				AC27AD901DE47EDD004D3CFC /* Post.swift in Sources */,
 				AC52704C1DDCE175007E079C /* AppDelegate.swift in Sources */,
 				AC52706C1DDDB39E007E079C /* FancyTextField.swift in Sources */,
 				AC5270701DDF483E007E079C /* FeedVC.swift in Sources */,
