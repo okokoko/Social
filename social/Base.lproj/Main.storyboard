@@ -183,13 +183,17 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="OMn-mt-IZg">
                                         <rect key="frame" x="8" y="8" width="327" height="49"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="add-image" translatesAutoresizingMaskIntoConstraints="NO" id="f4A-OT-lzz" customClass="CircleView" customModule="social" customModuleProvider="target">
+                                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="add-image" translatesAutoresizingMaskIntoConstraints="NO" id="f4A-OT-lzz" customClass="CircleView" customModule="social" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="49" height="49"/>
                                                 <color key="backgroundColor" red="0.057530499994754791" green="0.57877165079116821" blue="0.62672960758209229" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <gestureRecognizers/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="49" id="GCX-xa-WmB"/>
                                                     <constraint firstAttribute="width" constant="49" id="yVq-fe-PQf"/>
                                                 </constraints>
+                                                <connections>
+                                                    <outletCollection property="gestureRecognizers" destination="FDm-bd-Mwj" appends="YES" id="3W9-Os-FsU"/>
+                                                </connections>
                                             </imageView>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Add a caption" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Zsq-g2-o2W" customClass="FancyTextField" customModule="social" customModuleProvider="target">
                                                 <rect key="frame" x="59" y="0.0" width="209" height="49"/>
@@ -229,7 +233,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="398"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="27I-Zk-8p1" id="QLQ-jd-uH7">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="397"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="398"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" restorationIdentifier="  " translatesAutoresizingMaskIntoConstraints="NO" id="5z5-9G-qxZ" customClass="FancyView" customModule="social" customModuleProvider="target">
@@ -342,6 +346,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="imageAddTapped" destination="f4A-OT-lzz" id="Nqm-XQ-khn"/>
                         <outlet property="tableView" destination="SyM-zH-gkM" id="O30-bx-CVY"/>
                     </connections>
                 </viewController>
@@ -349,6 +354,11 @@
                 <tapGestureRecognizer id="zEF-fd-dXv">
                     <connections>
                         <action selector="signOutTapped:" destination="sh1-vP-YBV" id="uBQ-rA-jwb"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="FDm-bd-Mwj">
+                    <connections>
+                        <action selector="addImageTapped:" destination="sh1-vP-YBV" id="Myu-D2-N4n"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>

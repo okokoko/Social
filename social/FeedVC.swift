@@ -10,16 +10,25 @@ import UIKit
 import Firebase
 import SwiftKeychainWrapper
 
-class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     @IBOutlet var tableView: UITableView!
+    @IBOutlet var imageAddTapped: CircleView!
+    
+    
     var posts = [Post]()
+    var imagePicker: UIImagePickerController!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
+        
+        imagePicker = UIImagePickerController()
+        imagePicker.allowsEditing = true
+        imagePicker.delegate = self
+        
         DataService.ds.REF_POSTS.observe(.value, with:  {(snapshot) in
             if let snapshots = snapshot.children.allObjects as? [FIRDataSnapshot] {
                 for snap in snapshots {
@@ -53,9 +62,28 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         }
     }
     
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        if let image = info[UIImagePickerControllerEditedImage] as? UIImage {
+            imageAddTapped.image = image
+        } else {
+            
+            print("MARIO: Nebol zvolený platný obrázok")
+        }
+        imagePicker.dismiss(animated: true, completion: nil)
+        
+    }
+    
+    
+    
+    @IBAction func addImageTapped(_ sender: Any) {
+        present(imagePicker, animated: true, completion: nil)
+        
+    }
+    
+    
     @IBAction func signOutTapped(_ sender: Any) {
         
-        let KeychainResult = KeychainWrapper.standard.remove(key: KEY_UID)
+        let KeychainResult = KeychainWrapper.standard.removeObject(forKey: KEY_UID)
         print("MARIO: key \(KeychainResult) bol zmazaný")
         try! FIRAuth.auth()?.signOut()        
         dismiss(animated: true, completion: nil)
