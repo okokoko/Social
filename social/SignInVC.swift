@@ -60,7 +60,7 @@ class SignInVC: UIViewController, UITextFieldDelegate {
             } else {
                 print("MARIO: Autentifikásia u firebase je úspešná")
                 if let user = user {
-                    let userData = ["provider": credential.providerID]
+                    let userData = ["provider": credential.provider]
                     self.completeSignIn(id: user.uid, userData: userData)
                 }
             }
