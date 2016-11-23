@@ -107,7 +107,9 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIIm
                 } else {
                     print("MARIO: Obrazok sa podarilo uploadnuť")
                     let downloadLink = metadata?.downloadURL()?.absoluteString
-                    
+                    if let url = downloadLink {
+                        self.postToFirebase(imageURL: (url))
+                    }
                 }
             }
             
@@ -116,6 +118,22 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIIm
         
     }
     
+    
+    func postToFirebase(imageURL: String) {
+        let post:Dictionary<String, AnyObject> = [
+        "caption": captionField.text as AnyObject,
+        "imageURL": imageURL as AnyObject,
+        "likes": 0 as AnyObject
+        ]
+        let firebasePost = DataService.ds.REF_POSTS.childByAutoId().setValue(post)
+        
+        self.captionField.text = ""
+        self.imageSelected = false
+        imageAddTapped.image = UIImage(named: "add-image")
+        
+        tableView.reloadData()
+        
+    }
     
     @IBAction func addImageTapped(_ sender: Any) {
         present(imagePicker, animated: true, completion: nil)
