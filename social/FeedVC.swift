@@ -14,12 +14,14 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIIm
 
     @IBOutlet var tableView: UITableView!
     @IBOutlet var imageAddTapped: CircleView!
+    @IBOutlet var captionField: FancyTextField!
     
     
     var posts = [Post]()
     var imagePicker: UIImagePickerController!
     //static var imageCache: CachedURLResponse!
     static var imageCache = NSCache<NSString, UIImage>()
+    var imageSelected = false
 
     
     
@@ -75,6 +77,7 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIIm
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let image = info[UIImagePickerControllerEditedImage] as? UIImage {
             imageAddTapped.image = image
+            imageSelected = true
         } else {
             
             print("MARIO: Nebol zvolený platný obrázok")
@@ -83,6 +86,35 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIIm
         
     }
     
+    @IBAction func postBtnTapped(_ sender: Any) {
+        guard let caption = captionField.text, caption != "" else {
+            print("MARIO: Musí byť vložený nejaký text")
+            return
+        }
+        
+        guard let img = imageAddTapped.image, imageSelected == true else {
+            print("MARIO: Musí byť vložený nejaký obrázok")
+            return
+        }
+        
+        if let imgData = UIImageJPEGRepresentation(img, 0.2) {
+            let imgUid = NSUUID().uuidString
+            let metadata = FIRStorageMetadata()
+            metadata.contentType = "image/jpeg"
+            DataService.ds.REF_POST_IMAGES.child(imgUid).put(imgData, metadata: metadata) {(metadata, error) in
+                if error != nil {
+                    print("MARIO: Obrazok sa nepodarilo uploadnuť")
+                } else {
+                    print("MARIO: Obrazok sa podarilo uploadnuť")
+                    let downloadLink = metadata?.downloadURL()?.absoluteString
+                    
+                }
+            }
+            
+        }
+        
+        
+    }
     
     
     @IBAction func addImageTapped(_ sender: Any) {
